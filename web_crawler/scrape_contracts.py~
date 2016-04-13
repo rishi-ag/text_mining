@@ -49,43 +49,48 @@ def scrape_contracts(xml_urls, file_prefix):
             project_info.append(get_xml_content(url))
             
             #add completed url to the log of completed urls
-            with open("./data/projects/completed_urls.txt", "a") as complete_file:
+            with open("./completed_urls.txt", "a") as complete_file:
                 complete_file.write(url + '\n')
                 complete_file.close()
         except:
             #add rejected urls to the log of rejected urls
-            with open("./data/projects/rejected_urls.txt", "a") as rejected_file:
+            with open("./rejected_urls.txt", "a") as rejected_file:
                 rejected_file.write(url + '\n')
                 rejected_file.close()
         
         if idx % 10000 == 0 and idx != 0:
             #periodically write the data to file and reinitialise list for memory management
-            file_name = './data/projects/'+ file_prefix + str(idx) + '.gz'
+            file_name = file_prefix + str(idx) + '.gz'
             np.savetxt(file_name, project_info, delimiter=',', fmt='%s')
             project_info = []
             
             #add the index of last file to be written to disk
-            with open("./data/projects/saved_data_index.txt", "a") as saved_file:
+            with open("./saved_data_index.txt", "a") as saved_file:
                 saved_file.write(file_prefix + str(idx) + '\n')
                 saved_file.close()
     
     #Save remaining data to file    
     file_name = './data/projects/'+ file_prefix + str(idx) + '.gz'
     np.savetxt(file_name, project_info, delimiter=',', fmt='%s')
-    with open("./data/projects/saved_data_index.txt", "a") as saved_file:
+    with open("./saved_data_index.txt", "a") as saved_file:
                 saved_file.write(file_prefix + str(idx) + '\n')
                 saved_file.close()
     
     
 def main(argv):
+    #needs three arguments 
+    #1. start index of urls
+    #2. end index of urls
+    #3. prefix
     
     start_index = int(argv[0])
     end_index = int(argv[1])
     file_prefix = argv[2]
    
-    xml_urls = np.loadtxt('./data/complete_xml_urls.gz', dtype=str)[start_index:end_index]
+    xml_urls = np.loadtxt('./sample_xml_urls.txt', dtype=str)[start_index:end_index]
     scrape_contracts(xml_urls, file_prefix)
     
     
 if __name__ == '__main__':
+    #argv contains the arguments passed from the command line
     main(sys.argv[1:])

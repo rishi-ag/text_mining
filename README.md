@@ -1,6 +1,7 @@
 ###Class Resources
 1. Python 2.7
 2. ipython notebook
+
 For windows user, you may find it more useful to download anaconda.
 
 ### Web Crawler

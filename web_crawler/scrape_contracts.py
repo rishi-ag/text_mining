@@ -19,7 +19,8 @@ import numpy as np
 #To read the folder structure of the target
 import sys
 
-
+#to add randomised waiting time
+import time, random
 #import xml.etree.ElementTree as ET
 #import json
 ##################################################################################
@@ -43,7 +44,11 @@ def scrape_contracts(xml_urls, file_prefix):
     project_info = []
     
     for idx, url in enumerate(xml_urls):
-        
+        #random delay between 1 and 2 secs
+        delay = random.randint(1,2)
+        #pause execution for delay seconds
+        time.sleep(delay)
+        print 'file: ' + file_prefix + str(idx) + ' delay= ' + str(delay) 
         try:
             #try to retrieve information from url
             project_info.append(get_xml_content(url))

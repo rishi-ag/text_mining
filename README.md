@@ -8,7 +8,8 @@ For windows user, you may find it more useful to download anaconda.
 To run the web crawler navigate to the script scrape\_contracts.py in the folder web\_crawler. Use the following command python scrape\_contracts.py 0 9 10_ to run the script. Read the script to know more about what these parameters mean.
 
 Edit:- changes made to script
-1. Added random time delay (it was oveerwritten when I uploaded a new version)
+
+1. Added random time delay (it was over written when I uploaded a new version)
 
 ### HW Late Submission Rules
 -1 for every day of late submission except for exceptional circumstances.
